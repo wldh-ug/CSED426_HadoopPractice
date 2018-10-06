@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.*;
@@ -31,7 +30,8 @@ public class Multiplication1_1 {
 
 		// Definitely, parameter type and name (Text matrix, Text entry, Context
 		// context) must not be modified
-		public void map(Text matrix, Text entry, Context context) throws IOException, InterruptedException {
+		public void map(Text matrix, Text entry, Context context)
+				throws IOException, InterruptedException {
 			// Implement map function.
 
 			String[] record = entry.toString().split(",");
@@ -40,7 +40,8 @@ public class Multiplication1_1 {
 
 				for (int k = 0; k < n_second_cols; k++) {
 
-					context.write(new Text(record[0] + "," + k), new Text(record[1] + "," + record[2]));
+					context.write(new Text(record[0] + "," + k),
+							new Text(record[1] + "," + record[2]));
 
 				}
 
@@ -48,7 +49,8 @@ public class Multiplication1_1 {
 
 				for (int k = 0; k < n_first_rows; k++) {
 
-					context.write(new Text(k + "," + record[1]), new Text(record[0] + "," + record[2]));
+					context.write(new Text(k + "," + record[1]),
+							new Text(record[0] + "," + record[2]));
 
 				}
 
@@ -122,7 +124,8 @@ public class Multiplication1_1 {
 	}
 
 	// Definitely, Main function must not be modified
-	public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException {
+	public static void main(String[] args)
+			throws IOException, InterruptedException, ClassNotFoundException {
 		Configuration conf = new Configuration();
 		Job job = Job.getInstance(conf, "Matrix Multiplication1_1");
 

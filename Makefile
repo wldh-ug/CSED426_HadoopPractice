@@ -1,11 +1,11 @@
-watch: InvertedIndex.jar Join.jar
+watch: InvertedIndex.jar Join.jar MatrixMultiplication1_1.jar MatrixMultiplication1_2.jar
 
 clean:
-	@rm InvertedIndex.jar InvertedIndex/InvertedIndex*.class ii.output
-	@rm Join.jar Join/Join*.class j.output
-	@rm MatrixMultiplication1_1.jar MatrixMultiplication/Multiplication1_1*.class m11.output
-	@rm MatrixMultiplication1_2.jar MatrixMultiplication/Multiplication1_2*.class m12.output
-	@rm MatrixMultiplication2.jar MatrixMultiplication/Multiplication2*.class m2.output
+	@-rm InvertedIndex.jar InvertedIndex/InvertedIndex*.class ii.output
+	@-rm Join.jar Join/Join*.class j.output
+	@-rm MatrixMultiplication1_1.jar MatrixMultiplication/Multiplication1_1*.class m11.output
+	@-rm MatrixMultiplication1_2.jar MatrixMultiplication/Multiplication1_2*.class m12.output
+	@-rm MatrixMultiplication2.jar MatrixMultiplication/Multiplication2*.class m2.output
 
 test:
 	@echo "Enter \"testii\", \"testj\", \"testm11\", \"testm12\", or \"testm2\"."
@@ -54,8 +54,8 @@ testm12: MatrixMultiplication1_2.jar
 	@hdfs dfs -rm -r -f /user/input /user/output
 	@hdfs dfs -mkdir -p /user /user/input
 	@hdfs dfs -put -f MatrixMultiplication/data/* /user/input
-	@echo -e "\033[1;37m\nRunning Multiplication1_2 Program (Phase 2)...\033[0;37m"
-	@hadoop jar MatrixMultiplication1_2.jar Mutliplication1_2 /user/input/matrix1_1 /user/input/matrix1_2 /user/output/multiple1_2 3 5 2 2
+	@echo -e "\033[1;37m\nRunning Multiplication1_2 Program...\033[0;37m"
+	@hadoop jar MatrixMultiplication1_2.jar Multiplication1_2 /user/input/matrix1_1 /user/input/matrix1_2 /user/output/multiple1_2 3 5 2 3
 	@echo -e "\033[1;37m\nOutput from phase 1 will be saved to <m11.output>\033[0;37m"
 	@hdfs dfs -get -f /user/output/multiple1_2/part-r-00000 m11.output
 	@echo -e "\033[1;37m\nOutput from phase 2 will be saved to <m12.output>\033[0;37m"
@@ -89,8 +89,8 @@ MatrixMultiplication1_1.jar: MatrixMultiplication/Multiplication1_1.java
 
 MatrixMultiplication1_2.jar: MatrixMultiplication/Multiplication1_1.java MatrixMultiplication/Multiplication1_2.java
 	@echo -e "\033[1;37mBuild: MatrixMultiplication1_2.jar\033[0;37m"
-	@cd MatrixMultiplication; hadoop com.sun.tools.javac.Main Multiplication1_2.java Multiplication1_1.java
-	@cd MatrixMultiplication; jar cf MatrixMultiplication1_2.jar Multiplication1_2*.class Multiplication1_1*.class
+	@cd MatrixMultiplication; hadoop com.sun.tools.javac.Main Multiplication1_1.java Multiplication1_2.java
+	@cd MatrixMultiplication; jar cf MatrixMultiplication1_2.jar Multiplication1_*.class
 	@mv MatrixMultiplication/MatrixMultiplication1_2.jar .
 	@echo -e "\033[0m"
 
