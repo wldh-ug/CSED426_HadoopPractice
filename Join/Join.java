@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.LinkedList;
 import java.util.StringTokenizer;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -35,18 +37,40 @@ public class Join {
                 throws IOException, InterruptedException {
             // Implement map function
 
-            // context.write(newKey, newValue);
-            // }
+            String[] params = record.toString().split("\",\"");
+            params[0] = params[0].substring(1);
+            if (params.length > 1) {
+
+                params[params.length - 1] = params[params.length - 1].substring(0,
+                        params[params.length - 1].length() - 2);
+
+            }
+
+            if (params[0].equals(first_table_name)) {
+
+                context.write(new Text(params[first_table_join_index]), record);
+
+            } else if (params[0].equals(second_table_name)) {
+
+                context.write(new Text(params[second_table_join_index]), record);
+
+            }
+
         }
 
     }
 
     // Don't change (key, value) types
     public static class JoinReducer extends Reducer<Text, Text, Text, Text> {
+        String[] tableNames = new String[2];
+        String first_table_name = null;
+        String second_table_name = null;
 
         protected void setup(Context context) throws IOException, InterruptedException {
             // Similar to Mapper Class
-
+            tableNames = context.getConfiguration().getStrings("table_names");
+            first_table_name = tableNames[0];
+            second_table_name = tableNames[1];
         }
 
         public void reduce(Text order_id, Iterable<Text> records, Context context)
@@ -55,6 +79,35 @@ public class Join {
             // You can see form of new (key, value) pair in sample output file on server.
             // You can use Array or List or other Data structure for 'cache'.
             // context.write(newKey, newValue)
+
+            List<String> aList = new LinkedList<String>();
+            List<String> bList = new LinkedList<String>();
+
+            for (Text rec : records) {
+
+                String name = rec.toString().split(",")[0];
+
+                if (name.substring(1, name.length() - 1).equals(first_table_name)) {
+
+                    aList.add(rec.toString());
+
+                } else {
+
+                    bList.add(rec.toString());
+
+                }
+
+            }
+
+            for (String a : aList) {
+
+                for (String b : bList) {
+
+                    context.write(order_id, new Text(a + "," + b));
+
+                }
+
+            }
 
         }
 

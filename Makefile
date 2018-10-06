@@ -16,11 +16,11 @@ testii: InvertedIndex.jar
 	@hdfs dfs -rm -r -f /user/input /user/output
 	@hdfs dfs -mkdir -p /user /user/input
 	@hdfs dfs -put -f InvertedIndex/input/* /user/input
-	@echo -e "\033[1;37mRunning InvertedIndex Program...\033[0;37m"
+	@echo -e "\033[1;37m\nRunning InvertedIndex Program...\033[0;37m"
 	@hadoop jar InvertedIndex.jar InvertedIndex /user/input /user/output
-	@echo -e "\033[1;37mOutput will saved to <ii.output>\033[0;37m"
+	@echo -e "\033[1;37m\nOutput will saved to <ii.output>\033[0;37m"
 	@hdfs dfs -get -f /user/output/part-r-00000 ii.output
-	@echo -e "\033[1;37mDifferences\033[0;37m"
+	@echo -e "\033[1;37m\nDifferences\033[0;37m"
 	@-diff InvertedIndex/output/part-r-00000 ii.output
 	@echo -e "\033[0m"	
 
@@ -29,11 +29,11 @@ testj: Join.jar
 	@hdfs dfs -rm -r -f /user/input /user/output
 	@hdfs dfs -mkdir -p /user /user/input
 	@hdfs dfs -put -f Join/data/* /user/input
-	@echo -e "\033[1;37mRunning Join Program...\033[0;37m"
+	@echo -e "\033[1;37m\nRunning Join Program...\033[0;37m"
 	@hadoop jar Join.jar Join /user/input/records /user/output/join order,line_item 1 1
-	@echo -e "\033[1;37mOutput will saved to <j.output>\033[0;37m"
+	@echo -e "\033[1;37m\nOutput will saved to <j.output>\033[0;37m"
 	@hdfs dfs -get -f /user/output/join/part-r-00000 j.output
-	@echo -e "\033[1;37mDifferences\033[0;37m"
+	@echo -e "\033[1;37m\nDifferences\033[0;37m"
 	@-diff Join/output/part-r-00000 j.output
 	@echo -e "\033[0m"
 	
