@@ -1,2 +1,3 @@
 #!/bin/sh
+echo -e "Start watching all changes of java files... (^C to stop)\n"
 while true; do make -q || make; sleep 0.8; done
