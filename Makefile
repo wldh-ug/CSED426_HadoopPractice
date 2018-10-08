@@ -56,6 +56,17 @@ cleanm2:
 	@-rm MatrixMultiplication2.jar MatrixMultiplication/Multiplication2*.class m2.output
 
 test: testii testj testm11 testm12 testm2
+	@echo -e "\n\033[1;37mFinal Result!\033[0;37m\n"
+	@echo -e "\tInverted Index            : \c"
+	@cmp --silent InvertedIndex/output/part-r-00000 ii.output && echo -e "\033[1;32mSuccess\033[0m" || echo -e "\033[1;31mFailed\033[0m"
+	@echo -e "\tJoin                      : \c"
+	@cmp --silent Join/output/part-r-00000 j.output && echo -e "\033[1;32mSuccess\033[0m" || echo -e "\033[1;31mFailed\033[0m"
+	@echo -e "\tMatrix Multiplication 1_1 : \c"
+	@cmp --silent MatrixMultiplication/output/multiple1_1/part-r-00000 m11.output && echo -e "\033[1;32mSuccess\033[0m" || echo -e "\033[1;31mFailed\033[0m"
+	@echo -e "\tMatrix Multiplication 1_2 : \c"
+	@cmp --silent MatrixMultiplication/output/multiple1_2/part-r-00000 m11.output && cmp --silent MatrixMultiplication/output/multiple1_2/final/part-r-00000 m12.output && echo -e "\033[1;32mSuccess\033[0m" || echo -e "\033[1;31mFailed\033[0m"
+	@echo -e "\tMatrix Multiplication 2   : \c"
+	@cmp --silent MatrixMultiplication/output/multiple2/part-r-00000 m2.output && echo -e "\033[1;32mSuccess\033[0m\n" || echo -e "\033[1;31mFailed\033[0m\n"
 
 testii: InvertedIndex.jar
 	@echo -e "\033[1;37mInitializing HDFS structure...\033[0;37m"
