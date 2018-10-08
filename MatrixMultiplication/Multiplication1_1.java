@@ -36,6 +36,7 @@ public class Multiplication1_1 {
 
 			String[] record = entry.toString().split(",");
 
+			// NOTE: According to TA, names of matrices is fixed as "a" and "b"
 			if (matrix.toString().equals("a")) {
 
 				for (int k = 0; k < n_second_cols; k++) {

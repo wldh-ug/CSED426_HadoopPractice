@@ -119,7 +119,7 @@ testm2: MatrixMultiplication2.jar
 	@hdfs dfs -mkdir -p /user /user/input
 	@hdfs dfs -put -f MatrixMultiplication/data/* /user/input
 	@echo -e "\033[1;37m\nRunning Multiplication2 Program...\033[0;37m"
-	@hadoop jar MatrixMultiplication2.jar Multiplication2 /user/input/matrix2 /user/output/multiple2 3 5 2
+	@hadoop jar MatrixMultiplication2.jar Multiplication2 /user/input/matrix2 /user/output/multiple2 3 5 2 3
 	@echo -e "\033[1;37m\nOutput will be saved to <m2.output>\033[0;37m"
 	@hdfs dfs -get -f /user/output/multiple2/part-r-00000 m2.output
 	@echo -e "\033[1;37m\nDifferences\033[0;37m"
