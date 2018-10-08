@@ -14,4 +14,4 @@ This will build all homework items and automatically run jar in your Hadoop syst
 
 For more information, you can type `make help` for full command list.  
 ## What is `watch` file?
-It's linux shell script, if you run it, it tries to run `make all` every 0.5 seconds. That is, it helps you **automatically building jar files**.
+It's linux shell script, if you run it, it tries to run `make all` every 0.8 seconds. That is, it helps you **automatically building jar files**.
