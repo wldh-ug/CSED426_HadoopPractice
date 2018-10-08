@@ -1,6 +1,6 @@
 # Assignment#1 Hadoop
 
-I used Hadoop 2.8.1, following [the guideline](Hadoop Installation Guideline.pdf) provided by TA.
+I used Hadoop 2.8.1, following [the guideline](Hadoop%20Installation%20Guideline.pdf) provided by TA.
 
 ## How to compile and test
 
