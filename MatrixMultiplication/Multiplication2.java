@@ -46,6 +46,8 @@ public class Multiplication2 {
 
 			String[] cell = entry.toString().split(",");
 
+			// NOTE: "c" becomes after "a", "b"
+			// NOTE: names of matrices are fixed
 			if (matrix.toString().equals("c")) {
 
 				if (!preCalculated) {

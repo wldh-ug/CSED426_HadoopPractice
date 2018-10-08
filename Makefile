@@ -14,6 +14,7 @@ help:
 	@echo -e "\tcleanm11  Clear created files of MatrixMultiplication1_1"
 	@echo -e "\tcleanm12  Clear created files of MatrixMultiplication1_2"
 	@echo -e "\tcleanm2   Clear created files of MatrixMultiplication2\n"
+	@echo -e "\ttest      Test all items"
 	@echo -e "\ttestii    Test InvertedIndex"
 	@echo -e "\ttestj     Test Join"
 	@echo -e "\ttestm11   Test MatrixMultiplication1_1"
@@ -54,8 +55,7 @@ cleanm12:
 cleanm2:
 	@-rm MatrixMultiplication2.jar MatrixMultiplication/Multiplication2*.class m2.output
 
-test:
-	@echo "Enter \"testii\", \"testj\", \"testm11\", \"testm12\", or \"testm2\"."
+test: testii testj testm11 testm12 testm2
 
 testii: InvertedIndex.jar
 	@echo -e "\033[1;37mInitializing HDFS structure...\033[0;37m"
